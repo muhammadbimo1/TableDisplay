@@ -14,7 +14,7 @@ export const getItem = cache(async () => {
       .sort({ best_lap: 1 })
       .limit(1)
       .toArray();
-    if(fastestLapResult.length <= 0) {
+    if (fastestLapResult.length <= 0) {
       throw new NoEntryError();
     }
     const fastestLap = fastestLapResult[0].best_lap;
@@ -32,7 +32,7 @@ export const getItem = cache(async () => {
 
     return resultsWithGap;
   } catch (error) {
-    if(error instanceof NoEntryError) {
+    if (error instanceof NoEntryError) {
       return [];
     }
   }
