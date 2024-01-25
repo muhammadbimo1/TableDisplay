@@ -82,8 +82,9 @@ export default async function Home({ items }) {
         </div>
         {table}
       </div>
-      <footer>
-  <p></p>
+      <footer className='w-full text-center'>
+  <p>Copyright © B.E.G.O Racing Division. All rights reserved.</p>
+  <a href="https://github.com/muhammadbimo1/TableDisplay">Github</a>
   <p></p>
 </footer>
     </div>
