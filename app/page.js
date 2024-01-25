@@ -21,10 +21,9 @@ export default async function Home({ items }) {
   if (times.length > 0) {
     table = (
       <>
-        <h4 className='text-gray-300'>Current as of {getLatest(times)}</h4>
-        <table className='my-12 w-full border-collapse bg-gray-200 text-left text-sm'>
+        <table className='lg:my-10 w-full border-collapse lg:bg-gray-200 text-left text-sm'>
           <thead>
-            <tr>
+            <tr >
               <th className='w-11 border-t-2 border-red-600 bg-gray-800 px-4 py-2 text-center text-white'>
                 Rank
               </th>
@@ -46,13 +45,13 @@ export default async function Home({ items }) {
             {times.map((item, index) => {
               return (
                 <tr key={index} className='bg-gray-600 text-white'>
-                  <td className='border-b border-gray-300 px-4 py-2 text-center'>
+                  <td className='border-b bg-gray-800 border-gray-300 px-4 py-2 text-center'>
                     {index + 1}
                   </td>
                   <td className='border-b border-gray-300 px-4 py-2 text-center'>
                     {item.driver}
                   </td>
-                  <td className='border-b border-gray-300 px-4 py-2 text-center'>
+                  <td style={{fontWeight:600}} className='border-b border-gray-300 px-4 py-2 text-center'>
                     {formatTime(item.best_lap)}
                   </td>
                   <td className='border-b border-gray-300 px-4 py-2 text-center'>
@@ -74,12 +73,19 @@ export default async function Home({ items }) {
   return (
     <div
       style={{ backgroundImage: `url('/begobg.svg')` }}
-      className='h-screen bg-cover px-24 py-10 font-sans'
+      className=' bg-repeat lg:px-24 py-10 font-sans'
     >
-      <div className='px-60 py-20 '>
+      <div className='px-30 lg:px-60'>
+        <div className='mx-5 lg:mx-1'>
         <h2 className='text-white'>Time Results</h2>
+        <h4 className='text-gray-300'>Current as of {getLatest(times)}</h4>
+        </div>
         {table}
       </div>
+      <footer>
+  <p></p>
+  <p></p>
+</footer>
     </div>
   );
 }
