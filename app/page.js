@@ -16,13 +16,11 @@ export default async function Home({ items }) {
     }
   };
 
-  return (
-    <div
-      style={{ backgroundImage: `url('/begobg.svg')` }}
-      className='h-screen bg-cover px-24 py-10 font-sans'
-    >
-      <div className='px-60 py-20 '>
-        <h2 className='text-white'>Time Results</h2>
+  let table;
+
+  if (times.length > 0) {
+    table = (
+      <>
         <h4 className='text-gray-300'>Current as of {getLatest(times)}</h4>
         <table className='my-12 w-full border-collapse bg-gray-200 text-left text-sm'>
           <thead>
@@ -67,6 +65,20 @@ export default async function Home({ items }) {
             })}
           </tbody>
         </table>
+      </>
+    );
+  } else {
+    table = <h2 className='font-light'>No entries yet</h2>;
+  }
+
+  return (
+    <div
+      style={{ backgroundImage: `url('/begobg.svg')` }}
+      className='h-screen bg-cover px-24 py-10 font-sans'
+    >
+      <div className='px-60 py-20 '>
+        <h2 className='text-white'>Time Results</h2>
+        {table}
       </div>
     </div>
   );
