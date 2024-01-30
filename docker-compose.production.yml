@@ -1,0 +1,29 @@
+services:
+  entry:
+    environment:
+      - TRAEFIK_ENTRYPOINTS_WEB=true
+      - TRAEFIK_ENTRYPOINTS_WEB_ADDRESS=":80"
+
+      - TRAEFIK_ENTRYPOINTS_WEBSECURE=true
+      - TRAEFIK_ENTRYPOINTS_WEBSECURE_ADDRESS=":443"
+
+      - TRAEFIK_CERTIFICATESRESOLVERS_LETSENCRYPT=true
+      - TRAEFIK_CERTIFICATESRESOLVERS_LETSENCRYPT_ACME_EMAIL="${EMAIL}""
+      - TRAEFIK_CERTIFICATESRESOLVERS_LETSENCRYPT_ACME_STORAGE="/etc/traefik/acme/acme.json"
+      - TRAEFIK_CERTIFICATESRESOLVERS_LETSENCRYPT_ACME_TLSCHALLENGE=true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "./.acme:/etc/traefik/acme"
+
+  next:
+    labels:
+      - "traefik.http.routers.begotable-http.entrypoints=WEB"
+      - "traefik.http.routers.begotable-http.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.begotable-http.middlewares=begotable-https"
+      - "traefik.http.middlewares.begotable-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.begotable.entrypoints=WEBSECURE"
+      - "traefik.http.routers.begotable.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.begotable.tls=true"
+      - "traefik.http.routers.begotable.tls.certResolver=LETSENCRYPT"
