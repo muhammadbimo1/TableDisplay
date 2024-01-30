@@ -1,10 +1,12 @@
 services:
   entry:
     image: traefik:v2.10
-    command: --providers.docker
+    command: "--providers.docker.exposedByDefault=false"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
   next:
     image: awooooool/bego-table:latest
     build: .
+    labels:
+      - "traefik.enable=true"
