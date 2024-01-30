@@ -8,6 +8,7 @@ services:
 
       - "--certificatesresolvers.letsencrypt=true"
       - "--certificatesresolvers.letsencrypt.acme.email=${EMAIL}"
+      - "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
       - "--certificatesresolvers.letsencrypt.acme.storage=/etc/traefik/acme/acme.json"
 
       - --log.level=DEBUG
