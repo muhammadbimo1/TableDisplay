@@ -1,0 +1,13 @@
+services:
+  entry:
+    image: traefik:v2.10
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  next:
+    image: awooooool/bego-table:latest
+    restart: always
+    build: .
+    labels:
+      - "traefik.enable=true"

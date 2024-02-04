@@ -1,0 +1,10 @@
+services:
+  entry:
+    command:
+      - "--providers.docker.exposedByDefault=false"
+    ports:
+      - "127.0.0.1:80:80"
+
+  next:
+    labels:
+      - "traefik.http.routers.begotable.rule=Host(`localhost`)"

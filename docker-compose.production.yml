@@ -1,0 +1,28 @@
+services:
+  entry:
+    command:
+      - "--providers.docker.exposedByDefault=false"
+
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+
+      - "--certificatesresolvers.letsencrypt=true"
+      - "--certificatesresolvers.letsencrypt.acme.email=${EMAIL}"
+      - "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/etc/traefik/acme/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "./.acme:/etc/traefik/acme"
+
+  next:
+    labels:
+      - "traefik.http.routers.begotable-http.entrypoints=web"
+      - "traefik.http.routers.begotable-http.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.begotable-http.middlewares=begotable-https"
+      - "traefik.http.middlewares.begotable-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.begotable.entrypoints=websecure"
+      - "traefik.http.routers.begotable.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.begotable.tls=true"
+      - "traefik.http.routers.begotable.tls.certResolver=letsencrypt"

@@ -1,7 +1,8 @@
-import { formatTime, getItem, getLatest } from './utils';
+import { formatTime, getItem } from './utils';
 export const revalidate = 3600; // revalidate the data at most every hour
+export const dynamic = "force-dynamic"; // force dynamic for this page, got recognized as static by default for some reason
 
-export default async function Home({ items }) {
+export default async function Page({ items }) {
   const times = await getItem();
 
   const getLatest = (times) => {
@@ -73,7 +74,7 @@ export default async function Home({ items }) {
   return (
     <div
       style={{ backgroundImage: `url('/begobg.svg')` }}
-      className=' bg-repeat lg:px-24 py-10 font-sans'
+      className=' bg-repeat lg:px-24 py-10 h-screen font-sans'
     >
       <div className='px-30 lg:px-60'>
         <div className='mx-5 lg:mx-1'>
