@@ -74,7 +74,7 @@ export default async function Page({ items }) {
   return (
     <div
       style={{ backgroundImage: `url('/begobg.svg')` }}
-      className=' bg-repeat lg:px-24 py-10 font-sans'
+      className=' bg-repeat lg:px-24 py-10 h-screen font-sans'
     >
       <div className='px-30 lg:px-60'>
         <div className='mx-5 lg:mx-1'>
