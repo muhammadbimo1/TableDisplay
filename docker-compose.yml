@@ -9,5 +9,7 @@ services:
     image: awooooool/bego-table:latest
     restart: always
     build: .
+    environment:
+      - TZ=${TZ:-Asia/Jakarta}
     labels:
       - "traefik.enable=true"
