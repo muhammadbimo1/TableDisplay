@@ -57,6 +57,9 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 # Copy env.local to use
 COPY .env.local .
 
+# add tzdata to set timezone for container
+RUN apk add --no-cache tzdata
+
 USER nextjs
 
 EXPOSE 3000
